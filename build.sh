@@ -1,1 +1,1 @@
-docker build -t egon12/golang-tester-for-jenkins --squash .
+docker build -t egon12/gotest-jenkins --squash .
