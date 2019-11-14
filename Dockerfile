@@ -1,7 +1,7 @@
 FROM golang:1.10-alpine
 
 # installing dep for git
-RUN apk add --no-cache git
+RUN apk add --no-cache git ssh curl
 
 # install dep
 COPY install.sh /
