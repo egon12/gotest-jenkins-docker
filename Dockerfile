@@ -1,22 +1,13 @@
 FROM golang:1.10-alpine
 
-# installing dep for git
-RUN apk add --no-cache git openssh-client curl
-
 # install dep
-COPY install.sh /
-RUN /install.sh
-RUN rm /install.sh
+RUN wget -O- -nv https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
-# For sonar scanner
-RUN apk add --no-cache openjdk8-jre
-RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873.zip && \
-	unzip sonar-scanner-cli-4.2.0.1873.zip -d /opt/ && \
-	rm sonar-scanner-cli-4.2.0.1873.zip
+# golangci-lint
+RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.25.0
 
-ENV PATH="${PATH}:/opt/sonar-scanner-4.2.0.1873/bin"
-
-# Get go-junit-report
-RUN go get github.com/jstemmer/go-junit-report && go install github.com/jstemmer/go-junit-report && rm -r $GOPATH/src/github.com/jstemmer/go-junit-report
+# Get ghr (github reviewer)
+RUN wget -O /usr/bin/ghr https://github.com/egon12/ghr/releases/download/v0.0.1/ghr 
+RUN chmod a+x /usr/bin/ghr
 
 CMD sh
