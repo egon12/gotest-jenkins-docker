@@ -10,6 +10,6 @@ RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master
 RUN wget -O /usr/bin/ghr https://github.com/egon12/ghr/releases/download/v0.0.1/ghr 
 RUN chmod a+x /usr/bin/ghr
 
-RUN apk add rsync git
+RUN apk add openssh rsync git 
 
 CMD sh
